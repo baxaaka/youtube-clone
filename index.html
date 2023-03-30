@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/style.css" />
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Youtube clone</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      height: 70px;
+      background-color: #0f0f0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      z-index: 99;
+    }
+
+    main {
+      width: 100%;
+      height: 100vh;
+      background: #0f0f0f;
+      display: flex;
+      gap: 20px;
+    }
+    section {
+      width: 90%;
+      background-color: #0f0f0f;
+      position: relative;
+      top: 90px;
+      left: 270px;
+    }
+
+    .nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #0f0f0f;
+      margin: 0 auto;
+    }
+
+    .input {
+      width: 900px;
+      height: 50px;
+      background-color: #0f0f0f;
+    }
+    input {
+      width: 600px;
+      height: 40px;
+      border-radius: 50px;
+      border: 0.9px solid #ffffff51;
+      border-width: -0.1px;
+      outline: none;
+      background-color: #151515;
+      color: #ffffff;
+      text-align: center;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .icon {
+      width: 300px;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #0f0f0f;
+      position: fixed;
+      top: 70px;
+      z-index: 99;
+      transition: all 1s ease;
+    }
+
+    ul {
+      background-color: #0f0f0f;
+      height: 100vh;
+      line-height: 35px;
+      margin-top: 34px;
+      
+    }
+    li {
+      text-align: start;
+      margin: 23px;
+      padding-left: 40px;
+      color: azure;
+      list-style: none;
+      border-radius: 15px;
+      /* border: 0.2px solid #ffffff56; */
+    }
+
+    li:hover {
+      background-color: #464646;
+    }
+
+    /* scroll */
+    body::-webkit-scrollbar {
+      width: 10px;
+
+      height: 3px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background-color: #0f0f0f;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding-top: 34px;
+      padding-bottom: 34px;
+    }
+
+    /* scrol end */
+
+    .box {
+      background-color: #0f0f0f;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: -30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      transition: all 1s ease;
+    }
+    .card {
+      width: 300px;
+      height: 260px;
+      background-color: #0f0f0f;
+      border-radius: 20px;
+      position: relative;
+      top: 30px;
+      margin-top: 100px;
+    }
+
+    .card img {
+        width: 300px;
+        height: 160px;
+        border-radius: 15px;
+       
+    }
+
+    .icon{
+       
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        
+    }
+    #burger{
+        display: flex;
+        align-items: center;
+     
+        ;
+    }
+
+    .card h4 {
+      padding-left: 10px;
+    }
+    
+    .bur{
+      transition: all 1s ease;
+     
+    }
+    .h4{
+      color: #ffffff;
+    }
+    
+  </style>
+  <body>
+    <header>
+      <div class="nav">
+        <div id="burger"><img src="./img/menu.png" alt="burger" width="40px" height="30px"></div>
+        <div class="icon"><img src="./img/youtube.png" alt="icon" width="40px"><h3>YouTube</h3></div>
+        <div class="input">
+          <input type="text" />
+        </div>
+
+        <!--profil  -->
+        <div class="user"><img src="./img/hacker.png" alt="" width="40px"></div>
+      </div>
+    </header>
+
+    <main>
+     
+      <div class="sidebar">
+        <ul>
+          <li>Home</li>
+          <li>Shorts</li>
+          <li>Subscriptions</li>
+
+          <li>Library</li>
+          <li>History</li>
+          <li>Your videos</li>
+          <li>Wath later</li>
+          <li>Dowload</li>
+          <li>Liked videos</li>
+        </ul>
+      </div>
+
+      <section>
+        <div class="box"></div>
+      </section>
+    </main>
+  </body>
+
+  <script>
+    const box = document.querySelector(".box");
+    const input =document.querySelector("input")
+  
+
+    async function allCountries() {
+      const req = await fetch("https://restcountries.com/v3.1/all");
+      const res = await req.json();
+
+      allCard(res);
+    }
+
+    function allCard(res=[]) {
+        if(res.length ===0){
+            box.innerHTML=`<h4>hozir</h1>` ;
+        }else{
+             box.innerHTML=''
+        }
+        
+      res.forEach((e) => {
+        const cards = document.createElement("div");
+        cards.innerHTML = `<div class="card">
+                <img src=${e.flags.svg} alt="">
+                 <h4> name :${e.name.common}</h4>
+                 <h4> population:${e.population}</h4>
+                 <h4> name :${e.name.common}</h4>
+                 <h4> area :${e.area}</h4>
+                 </div>`;
+
+        box.appendChild(cards);
+      });
+    }
+
+    allCountries();
+
+
+    async function qidirCard(searchCard){
+        // const searchCard = input.value.toLowerCase().trim()
+        
+        const req = await fetch(`https://restcountries.com/v3.1/name/${searchCard}`)
+        const rek = await req.json()
+      
+        
+      
+    
+        allCard(rek);
+    }
+     
+   
+
+      input.addEventListener("keyup" , (e)=>{
+        qidirCard(e.target.value.toLowerCase().trim())
+      })
+
+    
+
+
+    // burger menu
+    
+  const burger = document.querySelector("#burger");
+  const sidebar = document.querySelector(".sidebar")
+  const bur = document.querySelector(".bur");
+   const car = document.querySelector(".card");
+  
+
+   
+    
+    burger.classList.add("bur")
+
+     burger.addEventListener("click", (e)=>{
+       
+      sidebar.style.transform = "translateX(-260px)"
+      sidebar.style.transition = "all easy 1s"
+      box.style.transform = "translateX(-150px)"
+      box.style.columnGap="5px"
+     
+      box.style.width="1600px"
+
+     })
+
+     burger.addEventListener( "dblclick" , (e)=>{
+       
+       sidebar.style.transform = "translateX(0px)"
+       box.style.transform = "translateX(100px)"
+       box.style.width="1400px"
+       box.style.columnGap="10px"
+ 
+      })
+
+    
+    
+
+
+  </script>
+</html>
